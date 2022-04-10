@@ -7,6 +7,9 @@ from flask import Flask
 from flask import request
 from flask import Response
 
+import yahoo_fin.stock_info as si
+tickersList = si.tickers_nasdaq()
+
 from tokens import telegram_token
 from tickersList import tickersList
 
