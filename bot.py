@@ -97,7 +97,7 @@ def main():
     print("Hi")
     # https://api.telegram.org/bot5151075958:AAE2HQgFExKfpatTd9orFRzJNaCpi29Xo-M/getMe
     # https://api.telegram.org/bot5151075958:AAE2HQgFExKfpatTd9orFRzJNaCpi29Xo-M/sendMessage?chat_id=782938461&text=Hello Farmaan
-    # https://api.telegram.org/bot5151075958:AAE2HQgFExKfpatTd9orFRzJNaCpi29Xo-M/setWebhook?url=https://c71ae6286836.ngrok.io
+    # https://api.telegram.org/bot5151075958:AAE2HQgFExKfpatTd9orFRzJNaCpi29Xo-M/setWebhook?url=https://kolkrabbi.heroku.com/hooks/github
 
 def sentimentAnalysis(ticker):
     finviz_url = 'https://finviz.com/quote.ashx?t='
