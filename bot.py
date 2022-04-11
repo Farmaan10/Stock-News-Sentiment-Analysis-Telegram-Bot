@@ -7,11 +7,11 @@ from flask import Flask
 from flask import request
 from flask import Response
 
-import yahoo_fin.stock_info as si
-tickersList = si.tickers_nasdaq()
+#import yahoo_fin.stock_info as si
+#tickersList = si.tickers_nasdaq()
 
 #from tokens import telegram_token
-#from tickersList import tickersList
+from tickersList import tickersList
 
 import nltk
 nltk.download('stopwords')
@@ -36,7 +36,7 @@ def parse_telegramMessage(message):
     chat_id = message['message']['chat']['id']
     txt = message['message']['text']
 
-    pattern = r'/[a-zA-z]{1,5}'
+    pattern = r'/[a-zA-Z]{1,5}'
 
     ticker = re.findall(pattern, txt)  # returns a list
     if ticker:
