@@ -46,14 +46,14 @@ def parse_telegramMessage(message):
     return chat_id, symbol
 
 def send_message(chat_id, text='Temp text'):
-    url = f'https://api.telegram.org/bot5151075958:AAE2HQgFExKfpatTd9orFRzJNaCpi29Xo-M/sendMessage'
+    url = f'https://api.telegram.org/bot5151075958:AAG6LAHC0j02tyK2DnuHtTTkpiHsLNq3QBo/sendMessage'
     payload = {'chat_id': chat_id, 'text': text} # Required parameters for sending a message is chat_id and text
 
     r = requests.post(url, json=payload)
     return r
 
 def send_photo(chat_id, sentiment):
-    url = f'https://api.telegram.org/bot5151075958:AAE2HQgFExKfpatTd9orFRzJNaCpi29Xo-M/sendPhoto'
+    url = f'https://api.telegram.org/bot5151075958:AAG6LAHC0j02tyK2DnuHtTTkpiHsLNq3QBo/sendPhoto'
     payload = {'chat_id': chat_id}
     files = {'photo': open(sentiment,'rb')}
     r = requests.post(url, payload,files=files)
@@ -95,9 +95,9 @@ def index():
 
 def main():
     print("Hi")
-    # https://api.telegram.org/bot5151075958:AAE2HQgFExKfpatTd9orFRzJNaCpi29Xo-M/getMe
-    # https://api.telegram.org/bot5151075958:AAE2HQgFExKfpatTd9orFRzJNaCpi29Xo-M/sendMessage?chat_id=782938461&text=Hello Farmaan
-    # https://api.telegram.org/bot5151075958:AAE2HQgFExKfpatTd9orFRzJNaCpi29Xo-M/setWebhook?url=https://kolkrabbi.heroku.com/hooks/github
+    # https://api.telegram.org/bot5151075958:AAG6LAHC0j02tyK2DnuHtTTkpiHsLNq3QBo/getMe
+    # https://api.telegram.org/bot5151075958:AAG6LAHC0j02tyK2DnuHtTTkpiHsLNq3QBo/sendMessage?chat_id=782938461&text=Hello Farmaan
+    # https://api.telegram.org/bot5151075958:AAG6LAHC0j02tyK2DnuHtTTkpiHsLNq3QBo/setWebhook?url=https://kolkrabbi.heroku.com/hooks/github
 
 def sentimentAnalysis(ticker):
     finviz_url = 'https://finviz.com/quote.ashx?t='
