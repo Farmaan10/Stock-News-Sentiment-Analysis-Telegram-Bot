@@ -36,7 +36,7 @@ def parse_telegramMessage(message):
     chat_id = message['message']['chat']['id']
     txt = message['message']['text']
 
-    pattern = r'/[a-zA-z]{1,5}'
+    pattern = r'/[a-zA-Z]{1,5}'
 
     ticker = re.findall(pattern, txt)  # returns a list
     if ticker:
