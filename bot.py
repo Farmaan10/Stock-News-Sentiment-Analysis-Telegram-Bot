@@ -46,14 +46,14 @@ def parse_telegramMessage(message):
     return chat_id, symbol
 
 def send_message(chat_id, text='Temp text'):
-    url = f'https://api.telegram.org/bot{telegram_token}/sendMessage'
+    url = f'https://api.telegram.org/bot5151075958:AAG6LAHC0j02tyK2DnuHtTTkpiHsLNq3QBo/sendMessage'
     payload = {'chat_id': chat_id, 'text': text} # Required parameters for sending a message is chat_id and text
 
     r = requests.post(url, json=payload)
     return r
 
 def send_photo(chat_id, sentiment):
-    url = f'https://api.telegram.org/bot{telegram_token}/sendPhoto'
+    url = f'https://api.telegram.org/bot5151075958:AAG6LAHC0j02tyK2DnuHtTTkpiHsLNq3QBo/sendPhoto'
     payload = {'chat_id': chat_id}
     files = {'photo': open(sentiment,'rb')}
     r = requests.post(url, payload,files=files)
