@@ -76,7 +76,7 @@ def index():
             return Response('ok', status = 200)
 
 
-        send_message(chat_id, "The Stock is : " + tickersList[symbol])
+        send_message(chat_id, "The Stock is : " + si.get_quote_data(symbol)["displayName"])
         send_message(chat_id, " Please wait")
         time.sleep(3)
         send_message(chat_id, "Analyzing the sentiment of the market...")
