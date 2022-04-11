@@ -10,7 +10,7 @@ from flask import Response
 import yahoo_fin.stock_info as si
 tickersList = si.tickers_nasdaq()
 
-from tokens import telegram_token
+#from tokens import telegram_token
 #from tickersList import tickersList
 
 import nltk
@@ -27,7 +27,7 @@ import matplotlib.pyplot as plt
 
 from flask_sslify import SSLify
 
-
+telegram_token = "5151075958:AAG6LAHC0j02tyK2DnuHtTTkpiHsLNq3QBo"
 app = Flask(__name__) # Name attribute refers to the current python file
 ssLify = SSLify(app)
 
