@@ -7,6 +7,9 @@ from flask import Flask
 from flask import request
 from flask import Response
 
+import yahoo_fin.stock_info as si
+tickersList = si.tickers_nasdaq()
+
 #from tokens import telegram_token
 #from tickersList import tickersList
 
@@ -24,7 +27,7 @@ import matplotlib.pyplot as plt
 
 from flask_sslify import SSLify
 
-
+telegram_token = "5151075958:AAG6LAHC0j02tyK2DnuHtTTkpiHsLNq3QBo"
 app = Flask(__name__) # Name attribute refers to the current python file
 ssLify = SSLify(app)
 
@@ -43,14 +46,14 @@ def parse_telegramMessage(message):
     return chat_id, symbol
 
 def send_message(chat_id, text='Temp text'):
-    url = f'https://api.telegram.org/bot{5151075958:AAE2HQgFExKfpatTd9orFRzJNaCpi29Xo-M}/sendMessage'
+    url = f'https://api.telegram.org/bot{telegram_token}/sendMessage'
     payload = {'chat_id': chat_id, 'text': text} # Required parameters for sending a message is chat_id and text
 
     r = requests.post(url, json=payload)
     return r
 
 def send_photo(chat_id, sentiment):
-    url = f'https://api.telegram.org/bot{5151075958:AAE2HQgFExKfpatTd9orFRzJNaCpi29Xo-M}/sendPhoto'
+    url = f'https://api.telegram.org/bot{telegram_token}/sendPhoto'
     payload = {'chat_id': chat_id}
     files = {'photo': open(sentiment,'rb')}
     r = requests.post(url, payload,files=files)
@@ -92,9 +95,9 @@ def index():
 
 def main():
     print("Hi")
-    # https://api.telegram.org/bot1857156700:AAG9XIp3puMK0FggJM4PDfQzUQ_97xLtwRQ/getMe
-    # https://api.telegram.org/bot1857156700:AAG9XIp3puMK0FggJM4PDfQzUQ_97xLtwRQ/sendMessage?chat_id=1150227166&text=Hello Keshav
-    # https://api.telegram.org/bot1857156700:AAG9XIp3puMK0FggJM4PDfQzUQ_97xLtwRQ/setWebhook?url=https://c71ae6286836.ngrok.io
+    # https://api.telegram.org/bot5151075958:AAG6LAHC0j02tyK2DnuHtTTkpiHsLNq3QBo/getMe
+    # https://api.telegram.org/bot5151075958:AAG6LAHC0j02tyK2DnuHtTTkpiHsLNq3QBo/sendMessage?chat_id=782938461&text=Hello Farmaan
+    # https://api.telegram.org/bot5151075958:AAG6LAHC0j02tyK2DnuHtTTkpiHsLNq3QBo/setWebhook?url=https://kolkrabbi.heroku.com/hooks/github
 
 def sentimentAnalysis(ticker):
     finviz_url = 'https://finviz.com/quote.ashx?t='
