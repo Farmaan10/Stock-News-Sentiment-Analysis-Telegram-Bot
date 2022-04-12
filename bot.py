@@ -142,7 +142,7 @@ def sentimentAnalysis(ticker):
     #Lemmatization
     w_tokenizer = nltk.tokenize.WhitespaceTokenizer()
     lemmatizer = nltk.stem.WordNetLemmatizer()
-    df['title'] = df.title.apply(lambda x: [lemmatizer.lemmatize(w) for w in w_tokenizer.tokenize(x)], axis=1)
+    df['title'] = df.title.apply(lambda x: [lemmatizer.lemmatize(w) for w in w_tokenizer.tokenize(x)])
     df['title'] = [' '.join(map(str, l)) for l in df['title']]
 
     # Lexicon-Based sentiment analysis
