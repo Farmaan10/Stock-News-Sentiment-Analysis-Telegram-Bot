@@ -138,11 +138,13 @@ def sentimentAnalysis(ticker):
     stop_words = set(stopwords.words('english'))
     df['title'] = df.apply(lambda row: word_tokenize(row['title']), axis=1)
     df['title'] = df['title'].apply(lambda x: [item for item in x if item not in stop_words])
-
+    # Back to a sentence
+    df['title'] = [' '.join(map(str, l)) for l in df['title']]
+    
     #Lemmatization
     w_tokenizer = nltk.tokenize.WhitespaceTokenizer()
     lemmatizer = nltk.stem.WordNetLemmatizer()
-    df['title'] = df['title'].apply(lambda x: [lemmatizer.lemmatize(w) for w in w_tokenizer.tokenize(x)])
+    df['title'] = df.title.apply(lambda x: [lemmatizer.lemmatize(w) for w in w_tokenizer.tokenize(x)])
     df['title'] = [' '.join(map(str, l)) for l in df['title']]
 
     # Lexicon-Based sentiment analysis
