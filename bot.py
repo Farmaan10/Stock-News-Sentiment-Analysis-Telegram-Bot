@@ -59,6 +59,13 @@ def send_message(chat_id, text='Temp text'):
     r = requests.post(url, json=payload)
     return r
 
+def send_Ticker_List(chat_id, txtx='Temp text'):
+    urlx = f'https://api.telegram.org/bot{telegram_token}/sendMessage'
+    payloadx = {'chat_id': chat_id, 'text': txtx, 'parse_mode' : 'MarkdownV2'} # Required parameters for sending a message is chat_id and text
+ 
+    rx = requests.post(urlx, json=payloadx)
+    return rx
+
 def send_photo(chat_id, sentiment):
     url = f'https://api.telegram.org/bot{telegram_token}/sendPhoto'
     payload = {'chat_id': chat_id}
@@ -80,10 +87,7 @@ def index():
 
         if symbol == 'START':
             send_message(chat_id, 'Welcome to our telegram bot named \'Stock News Sentiment Analysis\' created for analyzing the Stock News Headlines. \nPlease enter a valid stock ticker from the list of NASDAQ stock tickers in the link, preceded by a front slash \'/\'\n')
-            urlx = f'https://api.telegram.org/bot{telegram_token}/sendMessage'
-            txtx = '[Ticker List](https://stock-news-sentiment-analysis1.herokuapp.com/)' 
-            payloadx = {'chat_id': chat_id, 'text': txtx, 'parse_mode' : 'MarkdownV2'} # Required parameters for sending a message is chat_id and text
-            requests.post(urlx, json=payloadx)
+            send_Ticker_List(chat_id, '[Ticker List](https://stock-news-sentiment-analysis1.herokuapp.com/)')            
             return Response('ok', status = 200)
         
         if symbol not in tickersList and symbol != 'START':
