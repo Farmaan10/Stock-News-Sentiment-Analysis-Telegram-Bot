@@ -9,7 +9,7 @@ from flask import Response
 
 import yahoo_fin.stock_info as si
 tickersList = si.tickers_nasdaq()
-
+initial_msg = ['START']
 #from tokens import telegram_token
 #from tickersList import tickersList
 
@@ -64,7 +64,7 @@ def send_photo(chat_id, sentiment):
     payload = {'chat_id': chat_id}
     files = {'photo': open(sentiment,'rb')}
     r = requests.post(url, payload,files=files)
-    send_message(chat_id, 'The Graph shows the sentiment of market for your stock in the last few days. Scale is from -1(Negative) to +1(Positive)')
+    send_message(chat_id, 'The Bar Graph shows the sentiment of market for your desired stock for the last few days. \nScale is from -1(Negative) to +1(Positive)')
     return r
 
 def write_json(data, filename='noFileName_Response.json'):
@@ -78,10 +78,13 @@ def index():
         msg = request.get_json()
         chat_id, symbol = parse_telegramMessage(msg)
 
-        if symbol not in tickersList:
+        if symbol in initial_msg:
+            send_message(chat_id, 'Welcome to our telegram bot named \'Stock News Sentiment Analysis\' created for analyzing the Stock News Headlines. \nPlease enter a valid stock ticker (from the list in the link), preceded by a front slash \'/\'')
+            return Response('ok', status = 200)
+        
+        if symbol not in tickersList and not in initial_msg:
             send_message(chat_id, 'Wrong Name of Stock. Please refer the index.')
             return Response('ok', status = 200)
-
 
         send_message(chat_id, "The Stock is : " + si.get_quote_data(symbol)["displayName"])
         send_message(chat_id, " Please wait")
