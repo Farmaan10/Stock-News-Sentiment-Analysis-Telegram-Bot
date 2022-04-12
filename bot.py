@@ -19,6 +19,7 @@ nltk.download('punkt')
 nltk.download('wordnet')
 nltk.download('averaged_perceptron_tagger')
 nltk.download('sentiwordnet')
+nltk.download('omw-1.4')
 from nltk.corpus import wordnet as wn
 from nltk.corpus import sentiwordnet as swn
 from nltk.stem import WordNetLemmatizer
