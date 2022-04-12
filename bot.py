@@ -130,7 +130,7 @@ def sentimentAnalysis(ticker):
             date = date_data[0] 
             time = date_data[1]
 
-            parsed_data.append([ticker, date, time, title])
+        parsed_data.append([ticker, date, time, title])
 
 
     df = pd.DataFrame(parsed_data, columns=['ticker', 'date', 'time', 'title']) # Now converting the parsed data into a data frame
