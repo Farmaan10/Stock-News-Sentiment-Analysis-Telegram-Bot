@@ -64,7 +64,7 @@ def send_photo(chat_id, sentiment):
     payload = {'chat_id': chat_id}
     files = {'photo': open(sentiment,'rb')}
     r = requests.post(url, payload,files=files)
-    send_message(chat_id, 'The Graph shows the sentiment of market for your stock in the last few days. Scale is from -1(Negative) to +1(Positive)'
+    send_message(chat_id, 'The Graph shows the sentiment of market for your stock in the last few days. Scale is from -1(Negative) to +1(Positive)')
     return r
 
 def write_json(data, filename='noFileName_Response.json'):
