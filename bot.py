@@ -79,7 +79,8 @@ def index():
         chat_id, symbol = parse_telegramMessage(msg)
 
         if symbol == 'START':
-            send_message(chat_id, 'Welcome to our telegram bot named \'Stock News Sentiment Analysis\' created for analyzing the Stock News Headlines. Please enter a valid stock ticker from the list in the link, preceded by a front slash \'/\'')
+            txt1 = '[Welcome to our telegram bot named \'Stock News Sentiment Analysis\' created for analyzing the Stock News Headlines. \nPlease enter a valid stock ticker from the list of NASDAQ stock tickers in the link, preceded by a front slash \'/\'\n](https://stock-news-sentiment-analysis1.herokuapp.com/)'
+            send_message(chat_id, txt1, , parse_mode='MarkdownV2')
             return Response('ok', status = 200)
         
         if symbol not in tickersList and symbol != 'START':
