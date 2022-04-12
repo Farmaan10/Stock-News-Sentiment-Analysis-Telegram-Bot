@@ -9,7 +9,7 @@ from flask import Response
 
 import yahoo_fin.stock_info as si
 tickersList = si.tickers_nasdaq()
-initial_msg = ['START']
+initial_msg = 'START'
 #from tokens import telegram_token
 #from tickersList import tickersList
 
@@ -78,11 +78,11 @@ def index():
         msg = request.get_json()
         chat_id, symbol = parse_telegramMessage(msg)
 
-        if symbol in initial_msg:
+        if symbol == initial_msg:
             send_message(chat_id, 'Welcome to our telegram bot named \'Stock News Sentiment Analysis\' created for analyzing the Stock News Headlines. \nPlease enter a valid stock ticker from the list in the link, preceded by a front slash \'/\'')
             return Response('ok', status = 200)
         
-        if symbol not in tickersList and not in initial_msg:
+        if symbol not in tickersList and symbol != initial_msg:
             send_message(chat_id, 'Wrong Name of Stock. Please refer the index.')
             return Response('ok', status = 200)
 
