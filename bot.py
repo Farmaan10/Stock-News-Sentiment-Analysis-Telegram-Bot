@@ -87,7 +87,7 @@ def index():
 
         if symbol == 'START':
             send_message(chat_id, 'Welcome to our telegram bot named \'Stock News Sentiment Analysis\' created for analyzing the Stock News Headlines. \nPlease enter a valid stock ticker (symbol) from the list of NASDAQ stock tickers (given in the link below), preceding the ticker should be a front slash \'/\'\n')
-            send_Ticker_List(chat_id, '[Ticker List](https://stock-news-sentiment-analysis1.herokuapp.com/)')            
+            send_Ticker_List(chat_id, '[Ticker List](https://github.com/Farmaan10/NASDAQ-Stock-Tickers/blob/main/NASDAQ_Tickers_List.csv)')            
             return Response('ok', status = 200)
         
         if symbol not in tickersList and symbol != 'START':
