@@ -2,7 +2,6 @@ import requests
 import json
 import re
 import time
-import sklearn
 import pickle
 
 from flask import Flask 
