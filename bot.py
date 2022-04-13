@@ -104,7 +104,18 @@ def index():
         
         sentiment, ppd_data = sentimentAnalysis(symbol)
         send_photo(chat_id, sentiment)
-        total_news = hybrid_model(chat_id, ppd_data)
+        
+        #Hybrid model
+        news_vector = vectorizer.transform(ppd_data['title'])
+        df['ML model Prediction'] = model.predict(news_vector)    
+        total_len = len(df['ML model Prediction'])
+        pos_len = len(df[df['ML model Prediction']==1])
+        neg_len = len(df[df['ML model Prediction']==-1])
+        neu_len = len(df[df['ML model Prediction']==0])
+ 
+        send_message(chat_id, "The total number of news article headlines scanned were " + total_len + ", out of these there were:\n" + pos_len + "are Positive News\n" + neg_len + " are Negative News, and\n" + neu_len + " are Neutral News.")
+
+        #total_news = hybrid_model(chat_id, ppd_data)
         
         # for i in sentiment:
         #     send_message(chat_id, i[0]+" : "+str(i[1]))
@@ -115,17 +126,17 @@ def index():
     else:
         return '<h1>Stock News Sentiment Analysis Bot</h1>'
 
-def hybrid_model(chat_id, df = pd.DataFrame()):
-    news_vector = vectorizer.transform(df['title'])
-    df['ML model Prediction'] = model.predict(news_vector)    
-    total_len = len(df['ML model Prediction'])
-    pos_len = len(df[df['ML model Prediction']==1])
-    neg_len = len(df[df['ML model Prediction']==-1])
-    neu_len = len(df[df['ML model Prediction']==0])
+#def hybrid_model(chat_id, df = pd.DataFrame()):
+#    news_vector = vectorizer.transform(df['title'])
+#    df['ML model Prediction'] = model.predict(news_vector)    
+#    total_len = len(df['ML model Prediction'])
+#    pos_len = len(df[df['ML model Prediction']==1])
+#    neg_len = len(df[df['ML model Prediction']==-1])
+#    neu_len = len(df[df['ML model Prediction']==0])
  
-    send_message(chat_id, "The total number of news article headlines scanned were " + total_len + ", out of these there were:\n" + pos_len + "are Positive News\n" + neg_len + " are Negative News, and\n" + neu_len + " are Neutral News.")
+ #   send_message(chat_id, "The total number of news article headlines scanned were " + total_len + ", out of these there were:\n" + pos_len + "are Positive News\n" + neg_len + " are Negative News, and\n" + neu_len + " are Neutral News.")
     
-    return total_len
+#    return total_len
     
     
 def main():
