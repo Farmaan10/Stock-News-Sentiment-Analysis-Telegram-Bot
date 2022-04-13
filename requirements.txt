@@ -33,6 +33,7 @@ pywin32-ctypes==0.2.0
 PyYAML==6.0
 requests==2.26.0
 sip==5.0.0
+sklearn==1.0.2
 soupsieve==2.3.2
 tokens==0.0.3
 tqdm==4.64.0
