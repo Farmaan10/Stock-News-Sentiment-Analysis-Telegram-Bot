@@ -104,7 +104,7 @@ def index():
         send_photo(chat_id, sentiment)
         
         vectorizer = pickle.load(open('lem_tf_vectorizer.pkl', 'rb'))
-        model = pickle.load(open('lem_tf_mlp_model - Copy.pkl', 'rb'))
+        model = pickle.load(open('lem_tf_lr_model_pkl', 'rb'))
 
         #Hybrid model
         news_vector = vectorizer.transform(ppd_data['title'])
