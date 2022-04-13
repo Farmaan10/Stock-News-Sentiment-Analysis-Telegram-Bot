@@ -22,6 +22,7 @@ nltk==3.7
 numpy==1.22.3
 pandas==1.4.2
 pathspec==0.7.0
+pickleshare==0.7.5
 Pillow==9.1.0
 pyls-spyder==0.4.0
 pysentiment2==0.1.1
