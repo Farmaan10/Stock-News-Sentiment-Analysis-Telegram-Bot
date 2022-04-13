@@ -35,10 +35,12 @@ import matplotlib.pyplot as plt
 
 from flask_sslify import SSLify
 
+vectorizer = pickle.load(open('lem_tf_vectorizer.pkl', 'rb'))
+model = pickle.load(open('lem_tf_mlp_model - Copy.pkl', 'rb'))
+
 telegram_token = "5151075958:AAG6LAHC0j02tyK2DnuHtTTkpiHsLNq3QBo"
 app = Flask(__name__) # Name attribute refers to the current python file
 ssLify = SSLify(app)
-
 
 def parse_telegramMessage(message):
     chat_id = message['message']['chat']['id']
@@ -114,6 +116,8 @@ def index():
         return '<h1>Stock News Sentiment Analysis Bot</h1>'
 
 def main(df, chat_id):
+        
+    df['ML model Prediction'] = model.predict(news_vector)    
     total_len = len(df['ML model Prediction'])
     pos_len = len(df[df['ML model Prediction']==1])
     neg_len = len(df[df['ML model Prediction']==-1])
@@ -181,10 +185,6 @@ def sentimentAnalysis(ticker):
     df['compound'] = tokens.apply(g) # Applying the lambda function to all title in the df, and stroing them in the column compound
 
     df['date'] = pd.to_datetime(df.date).dt.date # Converting text in date column to standard date format
-    
-    vectorizer = pickle.load(open('lem_tf_vectorizer.pkl', 'rb'))
-    model = pickle.load(open('lem_tf_mlp_model - Copy.pkl', 'rb'))
-    df['ML model Prediction'] = model.predict(news_vector)    
     
     plt.figure(figsize=(10,8), dpi=600)
     mean_df = df.groupby(['ticker', 'date']).mean().unstack()
