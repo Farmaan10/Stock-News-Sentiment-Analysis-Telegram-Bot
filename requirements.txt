@@ -22,7 +22,6 @@ nltk==3.7
 numpy==1.22.3
 pandas==1.4.2
 pathspec==0.7.0
-pickle
 Pillow==9.1.0
 pyls-spyder==0.4.0
 pysentiment2==0.1.1
@@ -34,7 +33,7 @@ pywin32-ctypes==0.2.0
 PyYAML==6.0
 requests==2.26.0
 sip==5.0.0
-sklearn
+sklearn==0.22.1
 soupsieve==2.3.2
 tokens==0.0.3
 tqdm==4.64.0
