@@ -71,7 +71,7 @@ def send_photo(chat_id, sentiment):
     payload = {'chat_id': chat_id}
     files = {'photo': open(sentiment,'rb')}
     r = requests.post(url, payload,files=files)
-    send_message(chat_id, 'The Bar Graph shows the sentiment of market for your desired stock for the last few days. \nScale is from -1(Negative) to +1(Positive)')
+    send_message(chat_id, 'The Bar Graph shows market sentiment of your desired stock for the last few days. \nScale is from -1(Negative) to +1(Positive)')
     return r
 
 def write_json(data, filename='noFileName_Response.json'):
@@ -86,7 +86,7 @@ def index():
         chat_id, symbol = parse_telegramMessage(msg)
 
         if symbol == 'START':
-            send_message(chat_id, 'Welcome to our telegram bot named \'Stock News Sentiment Analysis\' created for analyzing the Stock News Headlines. \nPlease enter a valid stock ticker from the list of NASDAQ stock tickers in the link, preceded by a front slash \'/\'\n')
+            send_message(chat_id, 'Welcome to our telegram bot named \'Stock News Sentiment Analysis\' created for analyzing the Stock News Headlines. \nPlease enter a valid stock ticker (symbol) from the list of NASDAQ stock tickers (given in the link below), preceding the ticker should be a front slash \'/\'\n')
             send_Ticker_List(chat_id, '[Ticker List](https://stock-news-sentiment-analysis1.herokuapp.com/)')            
             return Response('ok', status = 200)
         
@@ -113,7 +113,7 @@ def index():
         neg_len = len(ppd_data[ppd_data['ML model Prediction']==-1])
         neu_len = len(ppd_data[ppd_data['ML model Prediction']==0])
         time.sleep(1)
-        send_message(chat_id, "The total number of news article headlines scanned were " + str(total_len) + ", out of these there were:\n" + str(pos_len) + "are Positive News\n" + str(neg_len) + " are Negative News, and\n" + str(neu_len) + " are Neutral News.")
+        send_message(chat_id, "The total number of news article headlines scanned were " + str(total_len) + ", out of these there were:\n" + str(pos_len) + " Positive News\n" + str(neg_len) + " Negative News, and\n" + str(neu_len) + " Neutral News.")
 
         #total_news = hybrid_model(chat_id, ppd_data)
         
