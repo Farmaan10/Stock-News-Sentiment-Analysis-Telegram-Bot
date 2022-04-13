@@ -2,6 +2,8 @@ import requests
 import json
 import re
 import time
+import sklearn
+import pickle
 
 from flask import Flask 
 from flask import request
@@ -173,6 +175,17 @@ def sentimentAnalysis(ticker):
     df['compound'] = tokens.apply(g) # Applying the lambda function to all title in the df, and stroing them in the column compound
 
     df['date'] = pd.to_datetime(df.date).dt.date # Converting text in date column to standard date format
+    
+    vectorizer = pickle.load(open('lem_tf_vectorizer.pkl', 'rb'))
+    model = pickle.load(open('lem_tf_mlp_model - Copy.pkl', 'rb'))
+    df['ML model Prediction'] = model.predict(news_vector)
+    
+    total_len = len(df['ML model Prediction'])
+    pos_len = len(df[df['ML model Prediction']==1])
+    neg_len = len(df[df['ML model Prediction']==-1])
+    neu_len = len(df[df['ML model Prediction']==0])
+    
+    txt = 'The total number of news article headlines scanned were {total_len}, out of these there were:\n{pos_len} Positive News\n{neg_len} Negative News, and\n{neu_len} Neutral News'
     
     plt.figure(figsize=(10,8), dpi=600)
     mean_df = df.groupby(['ticker', 'date']).mean().unstack()
