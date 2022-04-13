@@ -102,9 +102,9 @@ def index():
         time.sleep(3)
         send_message(chat_id, "Analyzing the sentiment of the market...")
         
-        sentiment, df = sentimentAnalysis(symbol)
+        sentiment, ppd_data = sentimentAnalysis(symbol)
         send_photo(chat_id, sentiment)
-        main(df, chat_id)
+        total_news = hybrid_model(chat_id, ppd_data)
         
         # for i in sentiment:
         #     send_message(chat_id, i[0]+" : "+str(i[1]))
@@ -115,7 +115,7 @@ def index():
     else:
         return '<h1>Stock News Sentiment Analysis Bot</h1>'
 
-def main(df, chat_id):
+def hybrid_model(chat_id, df = pd.DataFrame()):
     news_vector = vectorizer.transform(df['title'])
     df['ML model Prediction'] = model.predict(news_vector)    
     total_len = len(df['ML model Prediction'])
@@ -124,6 +124,12 @@ def main(df, chat_id):
     neu_len = len(df[df['ML model Prediction']==0])
  
     send_message(chat_id, "The total number of news article headlines scanned were " + total_len + ", out of these there were:\n" + pos_len + "are Positive News\n" + neg_len + " are Negative News, and\n" + neu_len + " are Neutral News.")
+    
+    return total_len
+    
+    
+def main():
+    primt("Hi")
     # https://api.telegram.org/bot5151075958:AAG6LAHC0j02tyK2DnuHtTTkpiHsLNq3QBo/getMe
     # https://api.telegram.org/bot5151075958:AAG6LAHC0j02tyK2DnuHtTTkpiHsLNq3QBo/sendMessage?chat_id=782938461&text=Hello Farmaan
     # https://api.telegram.org/bot5151075958:AAG6LAHC0j02tyK2DnuHtTTkpiHsLNq3QBo/setWebhook?url=https://stock-news-sentiment-analysis1.herokuapp.com/
