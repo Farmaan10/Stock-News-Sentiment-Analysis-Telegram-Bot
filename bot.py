@@ -124,7 +124,6 @@ def main(df, chat_id):
     neu_len = len(df[df['ML model Prediction']==0])
  
     send_message(chat_id, "The total number of news article headlines scanned were " + total_len + ", out of these there were:\n" + pos_len + "are Positive News\n" + neg_len + " are Negative News, and\n" + neu_len + " are Neutral News.")
-    return total_len
     # https://api.telegram.org/bot5151075958:AAG6LAHC0j02tyK2DnuHtTTkpiHsLNq3QBo/getMe
     # https://api.telegram.org/bot5151075958:AAG6LAHC0j02tyK2DnuHtTTkpiHsLNq3QBo/sendMessage?chat_id=782938461&text=Hello Farmaan
     # https://api.telegram.org/bot5151075958:AAG6LAHC0j02tyK2DnuHtTTkpiHsLNq3QBo/setWebhook?url=https://stock-news-sentiment-analysis1.herokuapp.com/
