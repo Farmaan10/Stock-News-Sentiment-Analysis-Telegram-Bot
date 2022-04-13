@@ -116,7 +116,7 @@ def index():
         return '<h1>Stock News Sentiment Analysis Bot</h1>'
 
 def main(df, chat_id):
-        
+    news_vector = vectorizer.transform(df['title'])
     df['ML model Prediction'] = model.predict(news_vector)    
     total_len = len(df['ML model Prediction'])
     pos_len = len(df[df['ML model Prediction']==1])
