@@ -35,6 +35,9 @@ import matplotlib.pyplot as plt
 
 from flask_sslify import SSLify
 
+vectorizer = pickle.load(open('lem_tf_vectorizer.pkl', 'rb'))
+model = pickle.load(open('lem_tf_lr_model_pkl', 'rb'))
+
 telegram_token = "5151075958:AAG6LAHC0j02tyK2DnuHtTTkpiHsLNq3QBo"
 app = Flask(__name__) # Name attribute refers to the current python file
 ssLify = SSLify(app)
@@ -96,27 +99,23 @@ def index():
 
         send_message(chat_id, "The Stock is : " + si.get_quote_data(symbol)["displayName"])
         send_message(chat_id, " Please wait")
-        time.sleep(3)
+        time.sleep(2)
         send_message(chat_id, "Analyzing the sentiment of the market...")
-        
-        
+                
         sentiment, ppd_data = sentimentAnalysis(symbol)
         send_photo(chat_id, sentiment)
         
-        vectorizer = pickle.load(open('lem_tf_vectorizer.pkl', 'rb'))
-        model = pickle.load(open('lem_tf_lr_model_pkl', 'rb'))
-
         #Hybrid model
         news_vector = vectorizer.transform(ppd_data['title'])
         time.sleep(1)
-        df['ML model Prediction'] = model.predict(news_vector)
+        ppd_data['ML model Prediction'] = model.predict(news_vector)
         time.sleep(1)
-        total_len = len(df['ML model Prediction'])
-        pos_len = len(df[df['ML model Prediction']==1])
-        neg_len = len(df[df['ML model Prediction']==-1])
-        neu_len = len(df[df['ML model Prediction']==0])
+        total_len = len(ppd_data['ML model Prediction'])
+        pos_len = len(ppd_data[ppd_data['ML model Prediction']==1])
+        neg_len = len(ppd_data[ppd_data['ML model Prediction']==-1])
+        neu_len = len(ppd_data[ppd_data['ML model Prediction']==0])
         time.sleep(2)
-        #send_message(chat_id, "The total number of news article headlines scanned were " + total_len + ", out of these there were:\n" + pos_len + "are Positive News\n" + neg_len + " are Negative News, and\n" + neu_len + " are Neutral News.")
+        send_message(chat_id, "The total number of news article headlines scanned were " + total_len + ", out of these there were:\n" + pos_len + "are Positive News\n" + neg_len + " are Negative News, and\n" + neu_len + " are Neutral News.")
 
         #total_news = hybrid_model(chat_id, ppd_data)
         
